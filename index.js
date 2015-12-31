@@ -24,6 +24,7 @@ module.exports = {
         acl: 'public-read',
         cacheControl: defaultCacheControl,
         expires: defaultExpires,
+        cacheConfig: null,
         distDir: function(context) {
           return context.distDir;
         },
@@ -54,6 +55,9 @@ module.exports = {
         var gzippedFiles  = this.readConfig('gzippedFiles');
         var bucket        = this.readConfig('bucket');
         var acl           = this.readConfig('acl');
+        var cacheConfig   = this.readConfig('cacheConfig');
+        var cacheControl  = this.readConfig('cacheControl');
+        var expires       = this.readConfig('expires');
         var prefix        = this.readConfig('prefix');
         var manifestPath  = this.readConfig('manifestPath');
 
@@ -70,6 +74,8 @@ module.exports = {
           prefix: prefix,
           bucket: bucket,
           acl: acl,
+          cacheControl: cacheControl,
+          expires: expires,
           manifestPath: manifestPath
         };
 
