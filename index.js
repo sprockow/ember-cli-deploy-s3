@@ -6,6 +6,12 @@ var minimatch = require('minimatch');
 var DeployPluginBase = require('ember-cli-deploy-plugin');
 var S3             = require('./lib/s3');
 
+var EXPIRE_IN_2030               = new Date('2030');
+var TWO_YEAR_CACHE_PERIOD_IN_SEC = 60 * 60 * 24 * 365 * 2;
+
+var defaultCacheControl = 'max-age='+TWO_YEAR_CACHE_PERIOD_IN_SEC+', public';
+var defaultExpires = EXPIRE_IN_2030;
+
 module.exports = {
   name: 'ember-cli-deploy-s3',
 
@@ -16,6 +22,8 @@ module.exports = {
         filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2}',
         prefix: '',
         acl: 'public-read',
+        cacheControl: defaultCacheControl,
+        expires: defaultExpires,
         distDir: function(context) {
           return context.distDir;
         },
